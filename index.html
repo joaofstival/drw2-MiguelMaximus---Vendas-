@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Loja Escolar — Vendas</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header>
+			<div class="brand">Loja Escolar</div>
+			<div class="search">
+				<input id="search" placeholder="Buscar produtos, ex: caderno, lápis..." aria-label="Buscar produtos" />
+				<button id="clearSearch" aria-label="Limpar busca">Limpar</button>
+			</div>
+			<div class="mini-info">
+				<button id="cartToggle" aria-label="Abrir carrinho" aria-pressed="false">🛒 <span id="cartCount">0</span></button>
+			</div>
+	</header>
+
+	<main>
+		<section>
+			<div class="controls">
+				<select id="categoryFilter">
+					<option value="all">Todas as categorias</option>
+					<option value="papelaria">Papelaria</option>
+					<option value="instrumentos">Instrumentos</option>
+					<option value="mochilas">Mochilas</option>
+				</select>
+				<select id="sort">
+					<option value="default">Ordenar</option>
+					<option value="price-asc">Preço: menor</option>
+					<option value="price-desc">Preço: maior</option>
+				</select>
+				<button id="clearFilters">Reset</button>
+			</div>
+
+			<div class="grid" id="products"></div>
+		</section>
+
+		<aside class="cart">
+			<h3>Carrinho</h3>
+			<div class="cart-list" id="cartList">
+				<div class="empty" id="cartEmpty">Seu carrinho está vazio</div>
+			</div>
+			<div class="total">
+				<div>Total</div>
+				<div id="totalPrice">R$ 0,00</div>
+			</div>
+
+			<div class="checkout">
+				<form id="checkoutForm">
+					<input id="name" placeholder="Nome completo" required />
+					<input id="address" placeholder="Endereço" required />
+					<select id="payment">
+						<option value="boleto">Boleto (simulação)</option>
+						<option value="pix">PIX (simulação)</option>
+						<option value="card">Cartão (simulação)</option>
+					</select>
+					<button class="btn-primary" id="placeOrder" type="button">Finalizar compra</button>
+					<button id="clearCart" type="button">Limpar carrinho</button>
+				</form>
+			</div>
+		</aside>
+
+	</main>
+	<footer>
+		Sistema cliente-only de vendas de material escolar — dados simulados. Abre no navegador localmente.
+	</footer>
+
+		<!-- Drawer do carrinho -->
+		<div id="cartDrawer" class="drawer" aria-hidden="true">
+			<div class="drawer-content" role="dialog" aria-label="Carrinho de compras">
+				<button id="closeDrawer" aria-label="Fechar carrinho">✕</button>
+				<h3>Carrinho</h3>
+				<div id="drawerList" class="cart-list"></div>
+				<div class="drawer-actions">
+					<input id="coupon" placeholder="Código do cupom" aria-label="Código do cupom" />
+					<button id="applyCoupon">Aplicar</button>
+					<div class="total"><div>Subtotal</div><div id="drawerSubtotal">R$ 0,00</div></div>
+					<div id="drawerCouponMsg" class="meta"></div>
+					<button id="drawerCheckout" class="btn-primary">Finalizar compra</button>
+				</div>
+			</div>
+			<div class="drawer-backdrop" tabindex="-1"></div>
+		</div>
+
+		<!-- Admin (front) simple: formulário para criar/editar produtos -->
+		<section id="admin" style="max-width:1100px;margin:18px auto;padding:20px;background:#fff;border:1px solid #e6eef6;border-radius:10px;">
+			<h3>Admin (sem autenticação)</h3>
+			<form id="productForm">
+				<div>
+					<label>Nome* <input id="p_name" name="name" required minlength="3" maxlength="60" /></label>
+				</div>
+				<div>
+					<label>Descrição <textarea id="p_desc" name="description"></textarea></label>
+				</div>
+				<div>
+					<label>Preço* <input id="p_price" name="price" required pattern="^\\d+(\\.\\d{1,2})?$" /></label>
+				</div>
+				<div>
+					<label>Estoque* <input id="p_stock" name="stock" required type="number" min="0" /></label>
+				</div>
+				<div>
+					<label>Categoria* <select id="p_category" required>
+						<option value="papelaria">Papelaria</option>
+						<option value="instrumentos">Instrumentos</option>
+						<option value="mochilas">Mochilas</option>
+					</select></label>
+				</div>
+				<div>
+					<label>SKU <input id="p_sku" name="sku" /></label>
+				</div>
+				<div style="display:flex;gap:8px;margin-top:8px;">
+					<button id="saveProduct" type="button">Salvar</button>
+					<button id="resetProduct" type="button">Limpar</button>
+				</div>
+			</form>
+			<div id="adminMsg" class="meta" style="margin-top:8px;"></div>
+		</section>
+
+		<script src="scripts.js"></script>
+</body>
+</html>

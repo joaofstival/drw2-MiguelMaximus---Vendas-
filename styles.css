@@ -1,0 +1,52 @@
+:root{--accent:#2b6cb0;--muted:#6b7280;--bg:#f7fafc}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;line-height:1.4;margin:0;background:var(--bg);color:#111}
+header{background:#fff;border-bottom:1px solid #e6edf3;padding:18px 20px;display:flex;align-items:center;gap:16px}
+.brand{font-weight:700;color:var(--accent);font-size:18px}
+.search{flex:1;display:flex;gap:8px}
+.search input{flex:1;padding:10px;border:1px solid #dbe7f0;border-radius:8px}
+main{display:grid;grid-template-columns:1fr 360px;gap:20px;padding:20px;max-width:1100px;margin:18px auto}
+@media(max-width:980px){main{grid-template-columns:1fr} .cart{order:2}}
+.controls{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.controls select, .controls button{padding:8px;border-radius:8px;border:1px solid #d1e3f5;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{background:#fff;border:1px solid #e6eef6;padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:8px}
+.thumb{height:120px;border-radius:8px;background:linear-gradient(135deg,#fff,#f1f7fb);display:flex;align-items:center;justify-content:center;font-size:32px}
+.title{font-weight:600}
+.price{color:var(--accent);font-weight:700}
+.meta{color:var(--muted);font-size:13px}
+.card button{margin-top:auto;padding:8px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+.cart{background:#fff;border:1px solid #e6eef6;padding:16px;border-radius:10px;height:fit-content}
+.cart h3{margin:0 0 10px 0}
+.cart-list{display:flex;flex-direction:column;gap:10px;max-height:360px;overflow:auto;padding-right:6px}
+.cart-item{display:flex;gap:10px;align-items:center}
+.ci-thumb{width:52px;height:52px;border-radius:6px;background:#f6fbff;display:flex;align-items:center;justify-content:center}
+.qty{display:flex;gap:6px;align-items:center}
+.qty button{padding:4px 8px;border-radius:6px;border:1px solid #d1e3f5;background:#fff}
+.total{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px dashed #e6eef6;margin-top:10px}
+.checkout{margin-top:12px}
+.checkout form{display:flex;flex-direction:column;gap:8px}
+.checkout input, .checkout select{padding:8px;border:1px solid #d1e3f5;border-radius:8px}
+.btn-primary{background:var(--accent);color:#fff;border:0;padding:10px;border-radius:8px;cursor:pointer}
+footer{max-width:1100px;margin:8px auto 30px;color:var(--muted);font-size:13px}
+.empty{color:var(--muted);padding:18px;text-align:center}
+
+/* Drawer do carrinho */
+.drawer{position:fixed;inset:0;display:none;z-index:60}
+.drawer[aria-hidden="false"]{display:block}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.35)}
+.drawer-content{position:fixed;right:0;top:0;height:100%;width:380px;background:#fff;border-left:1px solid #e6eef6;padding:18px;box-shadow:-10px 0 30px rgba(2,6,23,0.08);overflow:auto}
+.drawer-content button[aria-label="Fechar carrinho"]{background:transparent;border:0;font-size:18px;float:right}
+.drawer-actions{margin-top:12px}
+
+/* Header cart button */
+#cartToggle{background:transparent;border:0;font-size:18px;padding:8px;border-radius:8px;cursor:pointer}
+#cartToggle[aria-pressed="true"]{background:#e6f0fb}
+
+/* Admin form */
+#admin label{display:block;margin-bottom:6px}
+#admin input,#admin textarea,#admin select{width:100%;padding:8px;border:1px solid #d1e3f5;border-radius:6px}
+#admin button{padding:8px;border-radius:6px;border:1px solid #cfe3fb;background:#fff}
+
+/* Accessible focus */
+a:focus,button:focus,input:focus,select:focus,textarea:focus{outline:3px solid rgba(59,130,246,0.25);outline-offset:2px}
