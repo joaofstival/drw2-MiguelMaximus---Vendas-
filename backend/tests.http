@@ -1,0 +1,33 @@
+### List products
+GET http://localhost:8000/products
+
+### Get product by id
+GET http://localhost:8000/products/1
+
+### Create product (valid)
+POST http://localhost:8000/products
+Content-Type: application/json
+
+{
+  "name": "Teste - Caneta Azul",
+  "description": "Caneta de teste",
+  "price": 3.5,
+  "stock": 50,
+  "category": "papelaria",
+  "sku": "TEST-01"
+}
+
+### Create product (invalid price)
+POST http://localhost:8000/products
+Content-Type: application/json
+
+{
+  "name": "Produto inválido",
+  "description": "",
+  "price": 0,
+  "stock": 10,
+  "category": "papelaria"
+}
+
+### Delete product
+DELETE http://localhost:8000/products/1

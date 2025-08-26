@@ -169,11 +169,26 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   closeDrawer.addEventListener('click', closeDrawerFn);
   drawer.querySelector('.drawer-backdrop').addEventListener('click', closeDrawerFn);
 
+  // Keyboard accessibility: close drawer with Escape, trap focus minimally
+  document.addEventListener('keydown', (ev)=>{
+    if(ev.key === 'Escape'){
+      if(drawer.getAttribute('aria-hidden')==='false') closeDrawerFn();
+    }
+  });
+
+  // When opening drawer, move focus to the first focusable element inside
+  function focusFirstInDrawer(){
+    const focusable = drawer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if(focusable.length) focusable[0].focus();
+  }
+  const originalOpenDrawer = openDrawer;
+  openDrawer = ()=>{ drawer.setAttribute('aria-hidden','false'); cartToggle.setAttribute('aria-pressed','true'); focusFirstInDrawer(); };
+
   // Coupon
   applyCouponBtn.addEventListener('click', async ()=>{
     const code = (couponInput.value||'').trim(); if(!code) return drawerCouponMsg.textContent='Informe um cupom';
     const res = await apiFetch('/api/coupon',{method:'POST',body:JSON.stringify({code})});
-    if(res.status===200){ const data = await res.json(); appliedCoupon = data; drawerCouponMsg.textContent = data.message; renderCart(); } else { const err = await res.json(); drawerCouponMsg.textContent = err.error || 'Inválido'; }
+  if(res.status===200){ const data = await res.json(); appliedCoupon = data; drawerCouponMsg.textContent = data.message; renderCart(); } else { const err = await res.json(); drawerCouponMsg.textContent = err.error || 'Inválido'; }
   });
 
   // Checkout drawer
@@ -207,6 +222,10 @@ window.addEventListener('DOMContentLoaded', async ()=>{
 
   document.getElementById('saveProduct').addEventListener('click', saveProduct);
   document.getElementById('resetProduct').addEventListener('click', ()=>{ productForm.reset(); delete document.getElementById('p_sku').dataset.editId; adminMsg.textContent=''; });
+
+  // Ensure important controls have ARIA labels and are keyboard-focusable
+  cartToggle.setAttribute('aria-label','Abrir/Fechar carrinho');
+  document.querySelectorAll('#products .card button, #products .card button').forEach(b=>{ b.setAttribute('tabindex','0'); });
 
   // Sorting includes name asc/desc
   // Extend sort select options dynamically
