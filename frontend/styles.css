@@ -59,3 +59,39 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{outline:3px solid #
 
 /* Make interactive elements keyboard-friendly */
 button{appearance:none}
+
+/* Order confirmation overlay (full screen) */
+.order-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:120}
+.order-overlay[aria-hidden="false"]{display:flex}
+.order-overlay-content{background:#fff;color:#0b1220;padding:28px;border-radius:12px;max-width:640px;width:94%;text-align:center;box-shadow:0 10px 30px rgba(2,6,23,0.2);transform:translateY(12px);opacity:0;transition:all 260ms ease}
+.order-overlay[aria-hidden="false"] .order-overlay-content{transform:translateY(0);opacity:1}
+.order-overlay-content h2{margin:0 0 8px 0;font-size:28px}
+.order-overlay-content p{margin:0 0 18px 0;font-size:18px;color:var(--muted)}
+.order-overlay-content #overlayClose{padding:10px 18px}
+
+/* Modern theme adjustments: vibrant colors, gradients, glass cards */
+:root{--accent:#06b6d4;--accent-2:#7c3aed;--muted:#51636a;--bg:#f6fbff;--card-bg:linear-gradient(180deg,rgba(255,255,255,0.72),rgba(245,252,255,0.9));}
+body{font-family:'Poppins',Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#f0fbff 0%,#f6f9ff 50%);color:#071827}
+header{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border-bottom:0;padding:20px 28px;box-shadow:0 6px 18px rgba(4,10,26,0.08);border-radius:0 0 22px 22px}
+.brand{font-weight:800;font-size:20px;letter-spacing:0.2px;color:#fff}
+.search input{background:rgba(255,255,255,0.95);border:0;box-shadow:0 6px 18px rgba(4,10,26,0.06);}
+.grid{gap:18px}
+.card{background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid rgba(124,58,237,0.08);box-shadow:0 8px 20px rgba(12,28,60,0.06);padding:16px;border-radius:14px}
+.thumb{background:linear-gradient(135deg,#fff,#eef8ff);height:140px}
+.title{font-size:15px}
+.price{color:var(--accent-2);font-size:16px}
+.meta{color:var(--muted)}
+.card button{background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:10px;padding:10px 12px;box-shadow:0 8px 18px rgba(7,22,35,0.08)}
+.card button:hover{transform:translateY(-2px);transition:transform .18s ease}
+.controls select, .controls button{background:#fff;border-radius:10px;padding:10px;border:0;box-shadow:0 6px 14px rgba(7,18,28,0.06)}
+.cart{border-radius:14px;padding:18px;background:linear-gradient(180deg,#ffffff,#fbfdff);box-shadow:0 12px 30px rgba(7,18,28,0.06)}
+.total{font-weight:700;color:#0b1220}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 10px 24px rgba(7,22,35,0.08);padding:12px 14px;border-radius:12px}
+.btn-primary:hover{filter:brightness(1.02);transform:translateY(-2px)}
+footer{opacity:0.9}
+
+/* Make inputs and buttons slightly larger for modern feel */
+input,select,textarea,button{font-family:inherit}
+input,select{padding:12px}
+
+

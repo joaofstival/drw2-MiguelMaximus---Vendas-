@@ -3,8 +3,13 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<title>Loja Escolar — Vendas</title>
-	<link rel="stylesheet" href="styles.css">
+		<title>Loja Escolar  Vendas</title>
++		<link rel="preconnect" href="https://fonts.googleapis.com">
++		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
++		<meta name="theme-color" content="#06b6d4">
++		<link rel="stylesheet" href="styles.css">
+ 	</head>
 </head>
 <body>
 	<header>
@@ -87,7 +92,7 @@
 
 		<!-- Admin (front) simple: formulário para criar/editar produtos -->
 		<section id="admin" style="max-width:1100px;margin:18px auto;padding:20px;background:#fff;border:1px solid #e6eef6;border-radius:10px;">
-			<h3>Admin (sem autenticação)</h3>
+			<h3>Coloque seus dados</h3>
 			<form id="productForm">
 				<div>
 					<label>Nome* <input id="p_name" name="name" required minlength="3" maxlength="60" /></label>
@@ -118,6 +123,16 @@
 			</form>
 			<div id="adminMsg" class="meta" style="margin-top:8px;"></div>
 		</section>
+
+
+		<!-- Overlay de confirmação de pedido (exibe em tela cheia) -->
+		<div id="orderOverlay" class="order-overlay" aria-hidden="true">
+			<div class="order-overlay-content" role="dialog" aria-labelledby="orderOverlayTitle" aria-describedby="orderOverlayDesc">
+				<h2 id="orderOverlayTitle">Pedido finalizado</h2>
+				<p id="orderOverlayDesc">Obrigado pela compra</p>
+				<button id="overlayClose" class="btn-primary">Fechar</button>
+			</div>
+		</div>
 
 		<script src="scripts.js"></script>
 </body>

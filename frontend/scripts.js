@@ -71,6 +71,9 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   const couponInput = document.getElementById('coupon');
   const drawerCouponMsg = document.getElementById('drawerCouponMsg');
   const drawerCheckout = document.getElementById('drawerCheckout');
+  const placeOrderBtn = document.getElementById('placeOrder');
+  const orderOverlay = document.getElementById('orderOverlay');
+  const overlayClose = document.getElementById('overlayClose');
 
   const searchEl = document.getElementById('search');
   const categoryFilterEl = document.getElementById('categoryFilter');
@@ -191,8 +194,24 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   if(res.status===200){ const data = await res.json(); appliedCoupon = data; drawerCouponMsg.textContent = data.message; renderCart(); } else { const err = await res.json(); drawerCouponMsg.textContent = err.error || 'Inválido'; }
   });
 
-  // Checkout drawer
-  drawerCheckout.addEventListener('click', ()=>{ alert('Checkout simulado — obrigado!'); clearCart(); closeDrawerFn(); });
+  // Checkout: show full-screen confirmation overlay
+  function showOrderOverlay(){
+    if(!orderOverlay) return alert('Pedido finalizado — obrigado!');
+    orderOverlay.setAttribute('aria-hidden','false');
+    // auto close after 5 seconds
+    clearTimeout(orderOverlay._autoClose);
+    orderOverlay._autoClose = setTimeout(hideOrderOverlay,5000);
+  }
+  function hideOrderOverlay(){
+    if(!orderOverlay) return;
+    orderOverlay.setAttribute('aria-hidden','true');
+    clearTimeout(orderOverlay._autoClose);
+  }
+
+  drawerCheckout.addEventListener('click', ()=>{ clearCart(); closeDrawerFn(); showOrderOverlay(); });
+  if(placeOrderBtn) placeOrderBtn.addEventListener('click', ()=>{ clearCart(); showOrderOverlay(); });
+  if(overlayClose) overlayClose.addEventListener('click', hideOrderOverlay);
+  document.addEventListener('keydown', (ev)=>{ if(ev.key==='Escape' && orderOverlay && orderOverlay.getAttribute('aria-hidden')==='false') hideOrderOverlay(); });
 
   // Admin form handlers (CRUD via mock fetch)
   function validateProductPayload(payload){ const errors=[]; if(!payload.name||payload.name.length<3||payload.name.length>60) errors.push('Nome deve ter 3–60 caracteres'); if(!(payload.price>=0.01)) errors.push('Preço mínimo 0.01'); if(!(Number.isInteger(payload.stock) && payload.stock>=0)) errors.push('Estoque deve ser inteiro >= 0'); if(!payload.category) errors.push('Categoria obrigatória'); return errors; }
