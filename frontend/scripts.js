@@ -12,7 +12,11 @@ const MockAPI = (() => {
       {id:2,name:'Lápis HB (unidade)',price:1.5,category:'papelaria',meta:'Grafite macio',stock:120,sku:'LAP-HB'},
       {id:3,name:'Caneta esferográfica preta',price:2.9,category:'papelaria',meta:'Ponta 0.7mm',stock:80,sku:'CAN-PT'},
       {id:4,name:'Mochila escolar resistente',price:129.0,category:'mochilas',meta:'Grande, alças acolchoadas',stock:7,sku:'MOC-XL'},
-      {id:5,name:'Estojo com zíper',price:29.9,category:'papelaria',meta:'Compartimentos para canetas',stock:30,sku:'EST-01'}
+      {id:5,name:'Estojo com zíper',price:29.9,category:'papelaria',meta:'Compartimentos para canetas',stock:30,sku:'EST-01'},
+      {id:11,name:'Apontador duplo',price:4.5,category:'papelaria',meta:'Para lápis comum e jumbo',stock:50,sku:'APT-11'},
+      {id:12,name:'Régua 30cm transparente',price:3.2,category:'papelaria',meta:'Plástico flexível',stock:40,sku:'REG-12'},
+      {id:13,name:'Violão infantil',price:199.0,category:'instrumentos',meta:'Tamanho reduzido, nylon',stock:5,sku:'VIO-13'},
+      {id:14,name:'Mochila compacta',price:89.9,category:'mochilas',meta:'Leve, para crianças',stock:10,sku:'MOC-14'}
     ];
     localStorage.setItem(STORAGE_KEY,JSON.stringify(initial));
     return initial;
@@ -108,7 +112,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     for(const p of items){
       const card = document.createElement('div');card.className='card';
       card.innerHTML = `
-        <div class="thumb"><img src="assets/product-${p.id}.svg" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;border-radius:8px"/></div>
+        <div class="thumb"><img src="assets/product-${p.id}.jpg" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:8px" onerror="this.onerror=null;this.src='assets/product-${p.id}.png'"/></div>
         <div class="title">${p.name}</div>
         <div class="meta">${p.meta||''} | Estoque: ${p.stock||0}</div>
         <div class="price">${formatBRL(p.price)}</div>
@@ -139,7 +143,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     for(const id of keys){ const p = products.find(x=>x.id==id); const qty=cart[id]; total+=p.price*qty; count+=qty;
       const item = document.createElement('div'); item.className='cart-item';
       item.innerHTML = `
-        <div class="ci-thumb"><img src="assets/product-${p.id}.svg" alt="${p.name}" style="width:44px;height:44px;object-fit:contain;border-radius:6px"/></div>
+        <div class="ci-thumb"><img src="assets/product-${p.id}.jpg" alt="${p.name}" style="width:44px;height:44px;object-fit:cover;border-radius:6px" onerror="this.onerror=null;this.src='assets/product-${p.id}.png'"/></div>
         <div style="flex:1">
           <div style="font-weight:600">${p.name}</div>
           <div class="meta">${formatBRL(p.price)} x ${qty}</div>
